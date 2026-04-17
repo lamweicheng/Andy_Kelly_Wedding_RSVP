@@ -8,46 +8,44 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-enum StayType {
-  EXPLORED
-  FUTURE
-  BUCKET_LIST
+enum EventCity {
+  SAN_FRANCISCO
+  MALAYSIA
+  HONG_KONG
 }
 
-enum Tier {
-  S
-  A
-  B
-  C
-  D
+enum RSVPStatus {
+  PENDING
+  ATTENDING
+  NOT_ATTENDING
+  VIRTUAL
 }
 
-model Hotel {
-  id                 String   @id @default(cuid())
-  name               String
-  brand              String
-  stayType           StayType
-  tier               Tier?
-  roomEntries        Json
-  stayEntries        Json
-  bucketListLocation String?
-  bucketListImageUrl String?
-  position           Int      @default(0)
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+model Guest {
+  id          String     @id @default(cuid())
+  firstName   String
+  lastName    String
+  email       String     @unique
+  phone       String?
+  city        EventCity?
+  status      RSVPStatus @default(PENDING)
+  guestCount  Int        @default(1)
+  notes       String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
 
-  @@index([stayType, tier, position])
+  @@index([city, status])
 }
 
-model DashboardPreferences {
-  id                 String   @id
-  topPicks           Json
-  topSuites          Json
-  topFutureStays     Json
-  topExperiences     Json
-  topUnderrated      Json
-  topReturnStays     Json
-  displayPreferences Json
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+model EventDetail {
+  id          String    @id @default(cuid())
+  city        EventCity @unique
+  title       String
+  eventDate   DateTime
+  venueName   String?
+  address     String?
+  description String?
+  isVirtual   Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }

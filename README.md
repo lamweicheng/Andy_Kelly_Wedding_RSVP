@@ -1,14 +1,12 @@
-# Hyatt Tier List
+# Andy & Kelly's Wedding
 
-Rank Hyatt hotels across five tiers: S, A, B, C, and D. The app ships with a curated 38-brand Hyatt portfolio, assigns each brand its own color, and supports add/edit flows from a single modal.
+This project is a mobile-first wedding invitation site for Andy and Kelly. The homepage highlights the three planned celebrations:
 
-## What is in the app
+- San Francisco church ceremony and reception on 23 October 2027
+- Malaysia tea ceremony and wedding banquet on 13 November 2027
+- Hong Kong tea ceremony and wedding banquet on 20 November 2027
 
-- A redesigned homepage with a luxury-inspired Hyatt-style UI.
-- Tier rows that update immediately when a hotel is added or edited.
-- A shared modal for both create and edit actions.
-- Local-first persistence when no database is configured.
-- Prisma-backed API routes ready for Vercel + Postgres once `DATABASE_URL` and `DIRECT_URL` are set.
+Venue details and formal RSVP information can be added later once finalized.
 
 ## Running locally
 
@@ -19,13 +17,7 @@ npm run dev
 
 Open http://localhost:3000
 
-## Database setup
+## Notes
 
-The UI works without a database by storing entries in local browser storage. To enable server persistence:
-
-```bash
-npm run prisma:generate
-npm run prisma:migrate
-```
-
-Set the environment variables from `.env.example` before running migrations.
+- The design is built to prioritize mobile presentation first and scale cleanly to desktop.
+- Prisma is still available in the project if you decide to add guest RSVP storage later.
