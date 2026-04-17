@@ -19,7 +19,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex w-full items-center justify-center rounded-full bg-[rgb(var(--headline))] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-92 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+      className="rsvp-submit inline-flex w-full items-center justify-center rounded-full bg-[rgb(var(--headline))] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-92 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
     >
       {pending ? 'Saving RSVP...' : 'Send RSVP'}
     </button>
@@ -62,47 +62,51 @@ export function RsvpForm() {
   }
 
   return (
-    <form ref={formRef} action={formAction} className="space-y-6">
+    <form ref={formRef} action={formAction} className="rsvp-form-shell space-y-6">
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="space-y-2 text-sm font-medium text-[rgba(73,63,56,0.82)]">
-          <span>First name</span>
+        <div className="space-y-2 text-sm font-medium text-[rgba(73,63,56,0.82)]">
+          <label htmlFor="firstName">First name</label>
           <input
+            id="firstName"
             name="firstName"
-            className="w-full rounded-[18px] border border-[rgba(140,127,109,0.18)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[rgba(123,162,143,0.6)]"
+            className="rsvp-input w-full rounded-[18px] border border-[rgba(140,127,109,0.18)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[rgba(123,162,143,0.6)]"
             placeholder="Andy"
           />
-        </label>
-        <label className="space-y-2 text-sm font-medium text-[rgba(73,63,56,0.82)]">
-          <span>Last name</span>
+        </div>
+        <div className="space-y-2 text-sm font-medium text-[rgba(73,63,56,0.82)]">
+          <label htmlFor="lastName">Last name</label>
           <input
+            id="lastName"
             name="lastName"
-            className="w-full rounded-[18px] border border-[rgba(140,127,109,0.18)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[rgba(123,162,143,0.6)]"
+            className="rsvp-input w-full rounded-[18px] border border-[rgba(140,127,109,0.18)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[rgba(123,162,143,0.6)]"
             placeholder="Lam"
           />
-        </label>
+        </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-[1.2fr_0.8fr]">
-        <label className="space-y-2 text-sm font-medium text-[rgba(73,63,56,0.82)]">
-          <span>Email</span>
+        <div className="space-y-2 text-sm font-medium text-[rgba(73,63,56,0.82)]">
+          <label htmlFor="email">Email</label>
           <input
+            id="email"
             name="email"
             type="email"
-            className="w-full rounded-[18px] border border-[rgba(140,127,109,0.18)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[rgba(123,162,143,0.6)]"
+            className="rsvp-input w-full rounded-[18px] border border-[rgba(140,127,109,0.18)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[rgba(123,162,143,0.6)]"
             placeholder="you@example.com"
           />
-        </label>
-        <label className="space-y-2 text-sm font-medium text-[rgba(73,63,56,0.82)]">
-          <span>Phone</span>
+        </div>
+        <div className="space-y-2 text-sm font-medium text-[rgba(73,63,56,0.82)]">
+          <label htmlFor="phone">Phone</label>
           <input
+            id="phone"
             name="phone"
-            className="w-full rounded-[18px] border border-[rgba(140,127,109,0.18)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[rgba(123,162,143,0.6)]"
+            className="rsvp-input w-full rounded-[18px] border border-[rgba(140,127,109,0.18)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[rgba(123,162,143,0.6)]"
             placeholder="Optional"
           />
-        </label>
+        </div>
       </div>
 
-      <div className="rounded-[24px] border border-[rgba(125,152,136,0.2)] bg-[rgba(246,251,247,0.72)] p-5">
+      <div className="rsvp-panel rounded-[24px] border border-[rgba(125,152,136,0.2)] bg-[rgba(246,251,247,0.72)] p-5">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[rgba(88,116,101,0.82)]">
           Attendance
         </p>
@@ -114,7 +118,7 @@ export function RsvpForm() {
           ].map((option) => (
             <label
               key={option.value}
-              className={`rounded-[20px] border px-4 py-4 text-sm transition ${
+              className={`rsvp-choice rounded-[20px] border px-4 py-4 text-sm transition ${
                 attendanceType === option.value
                   ? 'border-[rgba(123,162,143,0.54)] bg-white shadow-[0_12px_30px_rgba(96,82,67,0.08)]'
                   : 'border-[rgba(140,127,109,0.14)] bg-[rgba(255,255,255,0.75)]'
@@ -134,22 +138,23 @@ export function RsvpForm() {
         </div>
       </div>
 
-      <div className="rounded-[24px] border border-[rgba(125,152,136,0.2)] bg-[rgba(255,252,248,0.9)] p-5">
+      <div className="rsvp-panel rounded-[24px] border border-[rgba(125,152,136,0.2)] bg-[rgba(255,252,248,0.9)] p-5">
         <div className="flex items-center justify-between gap-4">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[rgba(88,116,101,0.82)]">
             Celebration selection
           </p>
-          <label className="text-sm font-medium text-[rgba(73,63,56,0.8)]">
-            <span className="mr-2">Guests</span>
+          <div className="text-sm font-medium text-[rgba(73,63,56,0.8)]">
+            <label htmlFor="guestCount" className="mr-2">Guests</label>
             <input
+              id="guestCount"
               name="guestCount"
               type="number"
               min={1}
               max={10}
               defaultValue={1}
-              className="w-20 rounded-full border border-[rgba(140,127,109,0.18)] px-3 py-2 text-center"
+              className="rsvp-input w-20 rounded-full border border-[rgba(140,127,109,0.18)] px-3 py-2 text-center"
             />
-          </label>
+          </div>
         </div>
         <div className="mt-4 grid gap-3 sm:grid-cols-3">
           {EVENT_OPTIONS.map((event) => {
@@ -160,7 +165,7 @@ export function RsvpForm() {
             return (
               <label
                 key={event.value}
-                className={`rounded-[20px] border px-4 py-4 text-sm transition ${
+                className={`rsvp-choice rounded-[20px] border px-4 py-4 text-sm transition ${
                   selectedCities.includes(event.value)
                     ? 'border-[rgba(123,162,143,0.54)] bg-[rgba(199,223,208,0.18)]'
                     : 'border-[rgba(140,127,109,0.14)] bg-white'
@@ -185,15 +190,16 @@ export function RsvpForm() {
         </p>
       </div>
 
-      <label className="block space-y-2 text-sm font-medium text-[rgba(73,63,56,0.82)]">
-        <span>Notes</span>
+      <div className="block space-y-2 text-sm font-medium text-[rgba(73,63,56,0.82)]">
+        <label htmlFor="notes">Notes</label>
         <textarea
+          id="notes"
           name="notes"
           rows={4}
-          className="w-full rounded-[18px] border border-[rgba(140,127,109,0.18)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[rgba(123,162,143,0.6)]"
+          className="rsvp-input w-full rounded-[18px] border border-[rgba(140,127,109,0.18)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[rgba(123,162,143,0.6)]"
           placeholder="Dietary notes, travel timing, or anything we should know"
         />
-      </label>
+      </div>
 
       {state.message ? (
         <div
