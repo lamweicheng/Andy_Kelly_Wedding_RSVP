@@ -14,38 +14,45 @@ enum EventCity {
   HONG_KONG
 }
 
-enum RSVPStatus {
-  PENDING
-  ATTENDING
-  NOT_ATTENDING
+enum AttendanceType {
+  IN_PERSON
   VIRTUAL
+  DECLINED
 }
 
 model Guest {
-  id          String     @id @default(cuid())
-  firstName   String
-  lastName    String
-  email       String     @unique
-  phone       String?
-  city        EventCity?
-  status      RSVPStatus @default(PENDING)
-  guestCount  Int        @default(1)
-  notes       String?
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id             String         @id @default(cuid())
+  firstName      String
+  lastName       String
+  email          String         @unique
+  phone          String?
+  attendanceType AttendanceType @default(IN_PERSON)
+  selectedCities EventCity[]
+  guestCount     Int            @default(1)
+  notes          String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
 
-  @@index([city, status])
+  @@index([attendanceType])
 }
 
 model EventDetail {
-  id          String    @id @default(cuid())
-  city        EventCity @unique
-  title       String
-  eventDate   DateTime
-  venueName   String?
-  address     String?
-  description String?
-  isVirtual   Boolean   @default(false)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id                  String    @id @default(cuid())
+  city                EventCity @unique
+  title               String
+  eventDate           DateTime
+  venueLabel          String?
+  venueName           String?
+  address             String?
+  secondaryVenueLabel String?
+  secondaryVenueName  String?
+  secondaryAddress    String?
+  venueStatus         String?
+  description         String?
+  zoomLink            String?
+  latitude            Float?
+  longitude           Float?
+  timeline            Json?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
 }
